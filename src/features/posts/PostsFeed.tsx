@@ -12,7 +12,7 @@ const PostsParent = () => {
   const dispatch = useAppDispatch();
   const { posts } = useGetPostsData();
   const [loading, setLoading] = useState<boolean>(false);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {

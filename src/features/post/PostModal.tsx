@@ -11,38 +11,43 @@ import AllComments from '../comments/AllComments';
 import AudioPlayer from '../audio/AudioPlayer';
 import PostImage from '../../ui/PostImage';
 import { PostType } from '../../types/postType';
+import { PostUserType } from '../../types/postUserType';
 
-const PostModal = () => {
+const PostModal = ({userData}: {userData?: PostUserType}) => {
+  if(!userData) return <Spinner />
+  
   const { post_id } = usePost();
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState({} as PostType);
+  const { username, full_name, picture } = userData;
 
   useEffect(() => {
+    
     const getPost = async () => {
       try {
         setLoading(true);
         const post = await getSinglePost(post_id);
         setPost(post as PostType);
-
         setLoading(false);
       } catch (error) {
         console.log(error);
         setLoading(false);
       }
     };
-
     getPost();
   }, []);
+  //Comments will never open beacuse server never return type post.user or post.user.username with this type of request
+  // if (!post || !post.user || (!post.user.username && !loading))
 
-  if (!post || !post.user || (!post.user.username && !loading))
+  if (!post && !loading)
     return <Spinner />;
 
   return (
     <article className='py-4 px-6 max-w-2xl sma:max-h-[600px] smb:max-h-[550px] md:max-h-[700px] min-h-[360px] lg:min-w-[620px]  smb:bg-white md:bg-figmaGray shadow-lg  rounded-lg overflow-y-scroll break-words'>
       <UserInfo
-        username={post.user.username}
-        full_name={post.user.full_name}
-        picture={post.user.picture}
+        username={username}
+        full_name={full_name}
+        picture={picture}
         fullNameClassname={post.image ? '' : 'mb-3'}
       />
       {post.image && (

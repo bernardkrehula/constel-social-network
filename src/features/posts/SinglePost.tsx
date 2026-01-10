@@ -25,6 +25,8 @@ const SinglePost = memo(() => {
   } = usePost();
   const { username: currentUserUsername } = useGetUserData();
   const dispatch = useAppDispatch();
+  //UserData passed down to postModal
+  const userData = {username, full_name, picture};
   const deletePostHandler = async () => {
     const status = await deletePost(post_id);
 
@@ -32,7 +34,7 @@ const SinglePost = memo(() => {
       dispatch(removePost(post_id)) &&
       toast.success('Post succesfully deleted.');
   };
-
+  
   return (
     <article
       className={`${
@@ -72,7 +74,7 @@ const SinglePost = memo(() => {
 
       <div className='flex gap-2 justify-between sm:justify-start'>
         <LikeButton />
-        <CommentButton type='modal' />
+        <CommentButton type='modal' userData={userData}/>
       </div>
     </article>
   );

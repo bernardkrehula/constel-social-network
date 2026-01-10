@@ -3,8 +3,14 @@ import { faComment } from '@fortawesome/free-regular-svg-icons/faComment';
 import Modal from '../posts/Modal';
 import PostModal from './PostModal';
 import { usePost } from '../posts/PostContext';
+import { PostUserType } from '../../types/postUserType';
 
-const CommentButton = ({ type }: { type: string }) => {
+type CommentButtonType = {
+  type: string;
+  userData?: PostUserType;
+}
+
+const CommentButton = ({ type, userData }: CommentButtonType) => {
   const { comments } = usePost();
 
   const baseStyle =
@@ -23,11 +29,11 @@ const CommentButton = ({ type }: { type: string }) => {
           </button>
         </Modal.Open>
         <Modal.Window name='post-modal'>
-          <PostModal />
+          <PostModal userData={userData}/>
         </Modal.Window>
       </Modal>
     );
-
+  
   if (type == 'dummy')
     return (
       <button className={`${baseStyle} ${colorsDefault}`}>

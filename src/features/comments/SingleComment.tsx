@@ -27,7 +27,7 @@ const SingleComment = memo(
     picture,
     created_at,
     text,
-    post_id,
+    post_id
   }: UserInfoProps) => {
     const dispatch = useAppDispatch();
     const { username: currentUserUsername } = useGetUserData();

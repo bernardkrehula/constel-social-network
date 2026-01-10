@@ -22,7 +22,6 @@ export default async function createComment(id: string, text: string) {
 
       return toast.error(error.message);
     }
-
     const { comment } = await response.json();
     toast.success('Comment successfully created.');
 

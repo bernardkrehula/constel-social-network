@@ -3,23 +3,44 @@ import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import createComment from '../../api/createComment';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { addNewComment } from './commentsSlice';
+import { addNewComment, removeComment, setComments } from './commentsSlice';
 import { memo } from 'react';
 import toast from 'react-hot-toast';
+import getAllComments from '../../api/getAllComments';
 
 const WriteComment = memo(({ post_id }: { post_id: string }) => {
   const dispatch = useAppDispatch();
   const [commentText, setCommentText] = useState<string>('');
-
+  
   const submitHandler = async () => {
     if (!commentText.trim())
       return toast.error('Text comment cannot be empty!');
-
-    const comment = await createComment(post_id, commentText);
-
-    comment && dispatch(addNewComment(comment));
+    updateComments();
     setCommentText('');
   };
+
+  const updateComments = async() => {
+    //Optimistic update
+    const comment = {
+      comment_id: crypto.randomUUID(),
+      created_at: Date.now(),
+      full_name: 'Nemanja Malesija',
+      picture: 'https://constel-hr-frontend.s3.eu-central-1.amazonaws.com/nemanja_malesija.jpeg',
+      text: commentText,
+      username: 'nemanja_malesija'
+    }
+    dispatch(addNewComment(comment));
+    try{
+      //Return of createComment is always undefined
+      await createComment(post_id, commentText);
+      const commentsApi = await getAllComments(post_id);
+      dispatch(setComments(commentsApi));
+    }
+    catch(error){
+      dispatch(removeComment(comment.comment_id));
+      toast.error('Failed to post comment!');
+    }
+  }
 
   return (
     <form

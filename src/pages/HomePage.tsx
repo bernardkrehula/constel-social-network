@@ -5,6 +5,7 @@ import Sidebar from '../ui/Sidebar';
 import UserDropDown from '../features/user/UserDropDown';
 
 const HomePage = () => {
+  
   return (
     <div className='flex flex-col md:items:center md:justify-center lg:grid grid-cols-[300px,1fr,300px] max-w-[1366px] mx-auto'>
       <Sidebar />
