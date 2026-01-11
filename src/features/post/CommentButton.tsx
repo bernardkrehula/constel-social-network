@@ -19,7 +19,7 @@ const CommentButton = ({ type, user }: CommentButtonType) => {
   const colorsDefault =
     'bg-figmaGrayLight hover:bg-figmaGrayShade text-figmaGrayShade2 hover:text-white';
 
-  if (type == 'modal')
+  if (type == 'modal' && user)
     return (
       <Modal>
         <Modal.Open opens='post-modal'>

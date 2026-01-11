@@ -13,9 +13,7 @@ import PostImage from '../../ui/PostImage';
 import { PostType } from '../../types/postType';
 import { PostUserType } from '../../types/postUserType';
 
-const PostModal = ({user}: {user?: PostUserType}) => {
-  if(!user) return <Spinner />
-  
+const PostModal = ({user}: {user: PostUserType}) => {
   const { post_id } = usePost();
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState({} as PostType);
