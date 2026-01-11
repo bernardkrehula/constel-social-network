@@ -7,10 +7,10 @@ import { PostUserType } from '../../types/postUserType';
 
 type CommentButtonType = {
   type: string;
-  userData?: PostUserType;
+  user?: PostUserType;
 }
 
-const CommentButton = ({ type, userData }: CommentButtonType) => {
+const CommentButton = ({ type, user }: CommentButtonType) => {
   const { comments } = usePost();
 
   const baseStyle =
@@ -29,7 +29,7 @@ const CommentButton = ({ type, userData }: CommentButtonType) => {
           </button>
         </Modal.Open>
         <Modal.Window name='post-modal'>
-          <PostModal userData={userData}/>
+          <PostModal user={user}/>
         </Modal.Window>
       </Modal>
     );

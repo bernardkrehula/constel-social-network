@@ -13,13 +13,13 @@ import PostImage from '../../ui/PostImage';
 import { PostType } from '../../types/postType';
 import { PostUserType } from '../../types/postUserType';
 
-const PostModal = ({userData}: {userData?: PostUserType}) => {
-  if(!userData) return <Spinner />
+const PostModal = ({user}: {user?: PostUserType}) => {
+  if(!user) return <Spinner />
   
   const { post_id } = usePost();
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState({} as PostType);
-  const { username, full_name, picture } = userData;
+  const { username, full_name, picture } = user;
 
   useEffect(() => {
     
@@ -36,8 +36,6 @@ const PostModal = ({userData}: {userData?: PostUserType}) => {
     };
     getPost();
   }, []);
-  //Comments will never open beacuse server never return type post.user or post.user.username with this type of request
-  // if (!post || !post.user || (!post.user.username && !loading))
 
   if (!post && !loading)
     return <Spinner />;
