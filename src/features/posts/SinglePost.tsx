@@ -13,7 +13,7 @@ import deletePost from '../../api/deletePost';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { removePost } from './postsSlice';
 import toast from 'react-hot-toast';
-
+//Staviti da ima samo jedan loading spinner prije ucitavanja
 const SinglePost = memo(() => {
   const {
     post_id,
@@ -48,7 +48,7 @@ const SinglePost = memo(() => {
         <div className='flex items-center gap-3 '>
           <PostDate created_at={created_at} />
           {/* if post belongs to the current user allow delete */}
-          {username == currentUserUsername && (
+          {/* username == currentUserUsername && (
             <button
               className='flex items-center gap-1 text-sm text-figmaRed hover:text-figmaRedShade capitalize  md:self-start smb:absolute smb:-bottom-5 smb:left-1/2 
               smb:text-base smb:-translate-x-1/2 smb:translate-y-1/2 '
@@ -57,7 +57,7 @@ const SinglePost = memo(() => {
               <FontAwesomeIcon icon={faTrashCan} />
               <span>delete</span>
             </button>
-          )}
+          ) */}
         </div>
       </div>
 

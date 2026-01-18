@@ -3,7 +3,7 @@ import { faComment } from '@fortawesome/free-regular-svg-icons/faComment';
 import Modal from '../posts/Modal';
 import PostModal from './PostModal';
 import { usePost } from '../posts/PostContext';
-import { PostUserType } from '../../types/postUserType';
+import { PostUserType } from '../../types/PostUserType';
 
 type CommentButtonType = {
   type: string;
@@ -12,7 +12,7 @@ type CommentButtonType = {
 
 const CommentButton = ({ type, user }: CommentButtonType) => {
   const { comments } = usePost();
-
+  
   const baseStyle =
     'sma:py-2 sma:px-[3.2rem] smb:px-[4.6rem] smb:py-2 md:px-6 sm:py-1 text-lg md:text-base  md:py-1  sm:text-base text-figmaGrayShade2 rounded-lg transition-all duration-200 flex items-center gap-2';
 
