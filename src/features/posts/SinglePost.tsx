@@ -5,18 +5,18 @@ import LikeButton from '../post/LikeButton';
 import CommentButton from '../post/CommentButton';
 import AudioPlayer from '../audio/AudioPlayer';
 import PostImage from '../../ui/PostImage';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { useGetUserData } from '../../hooks/useGetUserData';
 import { memo } from 'react';
+import { useGetUserData } from '../../hooks/useGetUserData';
+/* import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import deletePost from '../../api/deletePost';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { removePost } from './postsSlice';
-import toast from 'react-hot-toast';
+import toast from 'react-hot-toast'; */
+
 //Staviti da ima samo jedan loading spinner prije ucitavanja
 const SinglePost = memo(() => {
   const {
-    post_id,
     audio,
     image,
     text,
@@ -24,15 +24,15 @@ const SinglePost = memo(() => {
     user
   } = usePost();
   const { username: currentUserUsername } = useGetUserData();
-  const dispatch = useAppDispatch();
+  /* const dispatch = useAppDispatch(); */
   const {username, full_name, picture} = user;
-  const deletePostHandler = async () => {
+  /* const deletePostHandler = async () => {
     const status = await deletePost(post_id);
 
     status == 200 &&
       dispatch(removePost(post_id)) &&
       toast.success('Post succesfully deleted.');
-  };
+  }; */
   
   return (
     <article
